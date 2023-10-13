@@ -38,13 +38,26 @@
     <div class="app">
       <!-- <header> -->
       <div class="header-admin">
-        <a href="homeAdmin.htm"
+        <a href="homeCustomer.htm"
           ><img src="/public/img/logo_lotte.png" alt="" class="logo"
         /></a>
 
         <div class="info-admin">
           <h5 id="username"></h5>
           <img src="/public/img/user.png" class="info-admin__img" />
+          <div class="header__cart-list">
+            <ul class="header__cart-list-item">
+              <li class="header__cart-item">
+                <div
+                  class="header__cart-item-info"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                >
+                  Đăng xuất
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -55,68 +68,151 @@
 
           <form id="passwordForm" class="update">
             <p>
-                <label class="update-label">Mật Khẩu Hiện Tại</label>
-                <input class="w3-input" type="password" id="currentPassword" name="currentPassword" required>
-                <span class="current"></span>
-            </p><br>
-    
+              <label class="update-label">Mật Khẩu Hiện Tại</label>
+              <input
+                class="w3-input"
+                type="password"
+                id="currentPassword"
+                name="currentPassword"
+                required
+              />
+              <span class="current"></span>
+            </p>
+            <br />
+
             <p>
-                <label class="update-label">Mật Khẩu Mới</label>
-                <input class="w3-input" type="password" id="newPassword" name="newPassword" required>
-                <span class=""></span>
-              </p><br>
-    
+              <label class="update-label">Mật Khẩu Mới</label>
+              <input
+                class="w3-input"
+                type="password"
+                id="newPassword"
+                name="newPassword"
+                required
+              />
+              <span class=""></span>
+            </p>
+            <br />
+
             <p>
-                <label class="update-label">Xác Nhận Lại Mật Khẩu</label>
-                <input class="w3-input" type="password" id="confirmPassword" name="confirmPassword" required>
-                <span class="confirm"></span>
-            </p><br>
+              <label class="update-label">Xác Nhận Lại Mật Khẩu</label>
+              <input
+                class="w3-input"
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                required
+              />
+              <span class="confirm"></span>
+            </p>
+            <br />
 
             <div class="btns">
-              <button id="updatePass" class="allcus-button" type="submit">Cập Nhật</button>
+              <button id="updatePass" class="allcus-button" type="submit">
+                Cập Nhật
+              </button>
               <button onclick="goBack()" class="allcus-button" type="submit">
                 Hủy
               </button>
             </div>
-    
-            
-        </form>
+          </form>
           <br /><br /><br /><br /><br />
         </div>
       </div>
 
-      <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="successModal1"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="successModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              Đổi mật khẩu thành công!
-            </div>
+            <div class="modal-body">Đổi mật khẩu thành công!</div>
             <div class="modal-footer">
-              <button type="button" class="btn-modal btn btn-danger" data-dismiss="modal">Đóng</button>
+              <button
+                type="button"
+                class="btn-modal btn btn-danger"
+                data-dismiss="modal"
+              >
+                Đóng
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="failModal1"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="successModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              Đổi mật khẩu thất bại!
-            </div>
+            <div class="modal-body">Đổi mật khẩu thất bại!</div>
             <div class="modal-footer">
-              <button type="button" class="btn-modal btn btn-danger" data-dismiss="modal">Đóng</button>
+              <button
+                type="button"
+                class="btn-modal btn btn-danger"
+                data-dismiss="modal"
+              >
+                Đóng
+              </button>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">Bạn muốn đăng xuất?</div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn-modal btn" data-dismiss="modal">
+              Ở lại
+            </button>
+            <button
+              type="button"
+              class="btn-modal btn btn-danger"
+              id="confirmDelete"
+            >
+              Đăng xuất
+            </button>
           </div>
         </div>
       </div>
@@ -127,66 +223,79 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const email = localStorage.getItem("selectedEmail");
-        // alert(email)
+
+        const logout = document.querySelector("#confirmDelete");
+        logout.addEventListener("click", function () {
+          window.location.href = "login.htm";
+        });
+
         axios
-        .get(`http://localhost:8080/api/customer/${email}`)
+          .get(`http://localhost:8080/api/customer/${email}`)
           .then((response) => {
             const dataUser = response.data.dataUser;
 
             const usernameElement = document.getElementById("username");
-            usernameElement.textContent =
-              "Xin chào! " + dataUser.username;
+            usernameElement.textContent = "Xin chào! " + dataUser.username;
 
-          const btnUpdatePass = document.getElementById("passwordForm");
-          btnUpdatePass.addEventListener("submit", function (e) {
-          e.preventDefault();
+            const btnUpdatePass = document.getElementById("passwordForm");
+            btnUpdatePass.addEventListener("submit", function (e) {
+              e.preventDefault();
 
-          const currentPassword = document.querySelector('input[name="currentPassword"]').value;
-          const newPassword = document.querySelector('input[name="newPassword"]').value;
-          const confirmPassword = document.querySelector('input[name="confirmPassword"]').value;
+              const currentPassword = document.querySelector(
+                'input[name="currentPassword"]'
+              ).value;
+              const newPassword = document.querySelector(
+                'input[name="newPassword"]'
+              ).value;
+              const confirmPassword = document.querySelector(
+                'input[name="confirmPassword"]'
+              ).value;
 
-          const invalidCurent = document.querySelector(".current");
-          const invalidConfirm = document.querySelector(".confirm");
+              const invalidCurent = document.querySelector(".current");
+              const invalidConfirm = document.querySelector(".confirm");
 
-          const password = dataUser.password;
-          if (currentPassword !== password) {
-            invalidCurent.textContent = "Mật khẩu hiện tại không đúng!"
-              return;
-          }
+              const password = dataUser.password;
+              if (currentPassword !== password) {
+                invalidCurent.textContent = "Mật khẩu hiện tại không đúng!";
+                return;
+              }
 
-          if (newPassword !== confirmPassword) {
-              invalidConfirm.textContent = "Mật khẩu xác nhận không khớp!"
-              return;
-          }
+              if (newPassword !== confirmPassword) {
+                invalidConfirm.textContent = "Mật khẩu xác nhận không khớp!";
+                return;
+              }
 
-          // Gửi yêu cầu cập nhật mật khẩu đến máy chủ
-          const updateData = {
-            email: email,
-              currentPassword: currentPassword,
-              newPassword: newPassword
-          };
+              // Gửi yêu cầu cập nhật mật khẩu đến máy chủ
+              const updateData = {
+                email: email,
+                currentPassword: currentPassword,
+                newPassword: newPassword,
+              };
 
-          axios.post("http://localhost:8080/api/customer/updatepassword", updateData)
-              .then((response) => {
-                $("#successModal").modal("show");
+              axios
+                .post(
+                  "http://localhost:8080/api/customer/updatepassword",
+                  updateData
+                )
+                .then((response) => {
+                  $("#successModal1").modal("show");
                   setTimeout(function () {
                     window.location.href = "infoCustomer.htm";
                   }, 2000);
-              })
-              .catch((error) => {
-                $("#failModal").modal("show");
+                })
+                .catch((error) => {
+                  $("#failModal1").modal("show");
 
-                setTimeout(function () {}, 2000);
-                              });
-              });
+                  setTimeout(function () {}, 2000);
+                });
+            });
           })
           .catch((error) => {
             alert("Không thể tải trang cập nhật");
             window.location.href = "infoCustomer.htm";
           });
       });
-    
-  </script>
+    </script>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

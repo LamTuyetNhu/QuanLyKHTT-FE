@@ -45,6 +45,19 @@
         <div class="info-admin">
           <h5 id="username"></h5>
           <img src="/public/img/user.png" class="info-admin__img" />
+          <div class="header__cart-list">
+            <ul class="header__cart-list-item">
+              <li class="header__cart-item">
+                <div
+                  class="header__cart-item-info"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                >
+                  Đăng xuất
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -59,10 +72,45 @@
       </div>
     </div>
 
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">Bạn muốn đăng xuất?</div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn-modal btn" data-dismiss="modal">
+              Ở lại
+            </button>
+            <button
+              type="button"
+              class="btn-modal btn btn-danger"
+              id="confirmDelete"
+            >
+              Đăng xuất
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const email = localStorage.getItem("selectedEmail");
+
+        const logout = document.querySelector("#confirmDelete");
+        logout.addEventListener("click", function () {
+          window.location.href = "login.htm";
+        });
 
         axios
           .get(`http://localhost:8080/api/customer/${email}`)
@@ -70,8 +118,7 @@
             const dataUser = response.data.dataUser;
 
             const usernameElement = document.getElementById("username");
-            usernameElement.textContent =
-              "Xin chào! " + dataUser.username;
+            usernameElement.textContent = "Xin chào! " + dataUser.username;
 
             var update = document.querySelector(".update");
 
@@ -124,7 +171,7 @@
               Update
             </button>
 
-            <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal fade" id="successModal1" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered"" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -142,7 +189,7 @@
               </div>
             </div>
 
-            <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal fade" id="failModal1" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered"" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -162,31 +209,37 @@
                      `;
 
             var updateButton = document.getElementById("updateCus");
-            
 
             updateButton.addEventListener("click", function () {
-
-            var usernameInput = document.querySelector('input[name="username"]').value
-            var addressInput = document.querySelector('input[name="address"]').value
-            // var dateofbirth = document.querySelector('input[name="dateofbirth"]').value
-            var emailInput = document.querySelector('input[name="email"]').value
-            var phonenumberInput = document.querySelector('input[name="phonenumber"]').value
-            // const emailPattern =
-            //     /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            //     var dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-            //     alert(dateofbirth)
-            //     if (
-            //     usernameInput.trim() === "" ||
-            //     addressInput.trim() === "" ||
-            //     emailInput.trim() === "" ||
-            //     phonenumberInput.trim() === "" ||
-            //     !emailPattern.test(emailInput) ||
-            //     phonenumberInput.length !== 10
-            //   ) {
-            //     $("#failModal").modal("show");
-            //       setTimeout(function () {}, 2000);
-            //       return;
-            //   }
+              var usernameInput = document.querySelector(
+                'input[name="username"]'
+              ).value;
+              var addressInput = document.querySelector(
+                'input[name="address"]'
+              ).value;
+              // var dateofbirth = document.querySelector('input[name="dateofbirth"]').value
+              var emailInput = document.querySelector(
+                'input[name="email"]'
+              ).value;
+              var phonenumberInput = document.querySelector(
+                'input[name="phonenumber"]'
+              ).value;
+              // const emailPattern =
+              //     /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+              //     var dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+              //     alert(dateofbirth)
+              //     if (
+              //     usernameInput.trim() === "" ||
+              //     addressInput.trim() === "" ||
+              //     emailInput.trim() === "" ||
+              //     phonenumberInput.trim() === "" ||
+              //     !emailPattern.test(emailInput) ||
+              //     phonenumberInput.length !== 10
+              //   ) {
+              //     $("#failModal").modal("show");
+              //       setTimeout(function () {}, 2000);
+              //       return;
+              //   }
 
               const updateData = {
                 emailOld: email,
@@ -198,16 +251,19 @@
               };
 
               axios
-                .post("http://localhost:8080/api/customer/updateCustomer", updateData)
+                .post(
+                  "http://localhost:8080/api/customer/updateCustomer",
+                  updateData
+                )
                 .then((response) => {
-                  $("#successModal").modal("show");
+                  $("#successModal1").modal("show");
 
                   setTimeout(function () {
                     window.location.href = "infoCustomer.htm";
                   }, 2000);
                 })
                 .catch((error) => {
-                  $("#failModal").modal("show");
+                  $("#failModal1").modal("show");
 
                   setTimeout(function () {}, 2000);
                 });

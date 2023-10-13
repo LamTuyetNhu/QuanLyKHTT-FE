@@ -215,7 +215,9 @@
               })
               .catch((error) => {
                 $("#failModal").modal("show");
-                setTimeout(function () {}, 2000);
+                setTimeout(function () {
+                  window.location.href = "login.htm";
+                }, 2000);
               });
           });
         }

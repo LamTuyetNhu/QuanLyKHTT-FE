@@ -43,8 +43,39 @@
         <div class="info-admin">
           <h5 id="nameAdmin"></h5>
           <img src="/public/img/user.png" class="info-admin__img" />
+          <div class="header__cart-list">
+            <ul class="header__cart-list-item">
+              <li class="header__cart-item">
+                <div class="header__cart-item-info" data-toggle="modal" data-target="#myModal">Đăng xuất</div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              Bạn muốn đăng xuất?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn-modal btn " data-dismiss="modal">Ở lại</button>
+              <button type="button" class="btn-modal btn btn-danger" id="confirmDelete">Đăng xuất</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <!-- Container -->
       <div class="container1 container-fluid">
@@ -75,8 +106,6 @@
                 <button id="unSearch" class="allcus-button" type="submit">
                   <ion-icon name="reload-outline"></ion-icon>
                 </button>
-
-                
               </div>
               <br /><br />
             </div>
@@ -113,6 +142,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+
+        const logout = document.querySelector("#confirmDelete")
+    logout.addEventListener('click', function () {
+      window.location.href = "home.htm"
+    })
+    
         const createBtn = document.getElementById("createBtn");
         createBtn.addEventListener("click", function (event) {
           event.preventDefault();
@@ -143,6 +178,13 @@
               const searchResults = response.data.dataUser;
               var userList = document.getElementById("myTable");
               userList.innerHTML = "";
+
+              if (searchResults.length == 0) {
+                var customerTr = document.createElement("div");
+                customerTr.classList.add("errorSearch")
+                customerTr.innerHTML = "Không tìm thấy kết quả!";
+                userList.appendChild(customerTr);
+              }
              
               var counter = 1;
               searchResults.forEach((customer) => {
@@ -172,11 +214,11 @@
 
                               <button class="allcus-button detail-button btn-delCus" data-id="${
                                 customer.idKH
-                              }" data-toggle="modal" data-target="#myModal" type="submit">
+                              }" data-toggle="modal" data-target="#myModal1" type="submit">
                                 Xóa
                                 </button>
 
-                                <div class="modal fade" id="myModal">
+                                <div class="modal fade" id="myModal1">
                                   <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
 
@@ -193,7 +235,7 @@
                                       <!-- Modal footer -->
                                       <div class="modal-footer">
                                         <button type="button" class="btn-modal btn " data-dismiss="modal">Hủy</button>
-                                        <button type="button" class="btn-modal btn btn-danger" id="confirmDelete">Xóa</button>
+                                        <button type="button" class="btn-modal btn btn-danger" id="confirmDelete1">Xóa</button>
                                       </div>
                                     </div>
                                   </div>
@@ -207,7 +249,7 @@
                           </div>
                         </td>
                       </tr>
-                      <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+                      <div class="modal fade" id="successModal1" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered"" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -225,7 +267,7 @@
               </div>
             </div>
 
-            <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal fade" id="failModal1" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered"" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -274,12 +316,12 @@
               btnDelCus.addEventListener("click", function () {
                 deleteCustomerId = this.getAttribute("data-id");
                 var confirmDeleteButton =
-                  document.getElementById("confirmDelete");
+                  document.getElementById("confirmDelete1");
                 confirmDeleteButton.setAttribute("data-id", deleteCustomerId);
               });
             }
 
-            var confirmDeleteButton = document.getElementById("confirmDelete");
+            var confirmDeleteButton = document.getElementById("confirmDelete1");
             confirmDeleteButton.addEventListener("click", function () {
               var deleteCustomerId = this.getAttribute("data-id");
               if (deleteCustomerId !== undefined) {
@@ -288,21 +330,21 @@
                     idKH: deleteCustomerId,
                   })
                   .then((response) => {
-                    $("#myModal").modal("hide");
+                    $("#myModal1").modal("hide");
 
-                    $("#successModal").modal("show");
+                    $("#successModal1").modal("show");
 
                     setTimeout(function () {
                       window.location.href = "listofcustomer.htm";
                     }, 2000);
                   })
                   .catch((error) => {
-                    $("#failModal").modal("show");
+                    $("#failModal1").modal("show");
 
                     setTimeout(function () {}, 2000);
                   });
               } else {
-                $("#failModal").modal("show");
+                $("#failModal1").modal("show");
 
                 setTimeout(function () {}, 2000);
               }
@@ -375,11 +417,11 @@
 
                               <button class="allcus-button detail-button btn-delCus" data-id="${
                                 customer.idKH
-                              }" data-toggle="modal" data-target="#myModal" type="submit">
+                              }" data-toggle="modal" data-target="#myModal1" type="submit">
                                 Xóa
                                 </button>
 
-                                <div class="modal fade" id="myModal">
+                                <div class="modal fade" id="myModal1">
                                   <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
 
@@ -396,7 +438,7 @@
                                       <!-- Modal footer -->
                                       <div class="modal-footer">
                                         <button type="button" class="btn-modal btn " data-dismiss="modal">Hủy</button>
-                                        <button type="button" class="btn-modal btn btn-danger" id="confirmDelete">Xóa</button>
+                                        <button type="button" class="btn-modal btn btn-danger" id="confirmDelete1">Xóa</button>
                                       </div>
                                     </div>
                                   </div>
@@ -410,7 +452,7 @@
                           </div>
                         </td>
                       </tr>
-                      <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+                      <div class="modal fade" id="successModal1" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered"" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -428,7 +470,7 @@
               </div>
             </div>
 
-            <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal fade" id="failModal1" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered"" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -478,12 +520,12 @@
               btnDelCus.addEventListener("click", function () {
                 deleteCustomerId = this.getAttribute("data-id");
                 var confirmDeleteButton =
-                  document.getElementById("confirmDelete");
+                  document.getElementById("confirmDelete1");
                 confirmDeleteButton.setAttribute("data-id", deleteCustomerId);
               });
             }
 
-            var confirmDeleteButton = document.getElementById("confirmDelete");
+            var confirmDeleteButton = document.getElementById("confirmDelete1");
             confirmDeleteButton.addEventListener("click", function () {
               var deleteCustomerId = this.getAttribute("data-id");
               if (deleteCustomerId !== undefined) {
@@ -492,21 +534,21 @@
                     idKH: deleteCustomerId,
                   })
                   .then((response) => {
-                    $("#myModal").modal("hide");
+                    $("#myModal1").modal("hide");
 
-                    $("#successModal").modal("show");
+                    $("#successModal1").modal("show");
 
                     setTimeout(function () {
                       window.location.href = "listofcustomer.htm";
                     }, 2000);
                   })
                   .catch((error) => {
-                    $("#failModal").modal("show");
+                    $("#failModal1").modal("show");
 
                     setTimeout(function () {}, 2000);
                   });
               } else {
-                $("#failModal").modal("show");
+                $("#failModal1").modal("show");
 
                 setTimeout(function () {}, 2000);
               }
@@ -522,17 +564,6 @@
                 if (coinCustomerId !== undefined) {
                   localStorage.setItem("selectedCustomer", coinCustomerId);
                   window.location.href = "updateCoinCus.htm";
-                  // axios
-                  //   .get(
-                  //     "http://localhost:8080/api/admin/addcoins/${coinCustomerId}"
-                  //   )
-                  //   .then((response) => {
-                  //     window.location.href = "updateCoinCus.htm";
-                  //   })
-                  //   .catch((error) => {
-                  //     alert("Không thể hiển thị");
-                  //     window.location.href = "listofcustomer.htm";
-                  //   });
                 } else {
                   alert("Không thể hiển thị");
                   window.location.href = "listofcustomer.htm";

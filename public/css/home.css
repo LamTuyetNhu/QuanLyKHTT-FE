@@ -61,7 +61,76 @@ html {
   border-radius: 50%;
 }
 
-.logout {
+.info-admin:hover .header__cart-list {
+  display: block;
+}
+
+.header__cart-list {
+  position: absolute;
+  top:85px;
+  right: 0px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3.125em 0 rgb(0, 0, 0, 0.2);
+  display: none;
+  animation: fadeIn ease-in 0.2s;
+  cursor: default;
+  z-index: 1;
+  margin-right: 10px;
+  width: 150px;
+}
+
+.header__cart-list::after {
+  content: "";
+  position: absolute;
+  right: 30%;
+  top: -32px;
+  border-width: 20px 23px;
+  border-style: solid;
+  cursor: pointer;
+  border-color: transparent transparent #fff transparent;
+}
+
+.header__cart-list ul {
+  margin-bottom: 0;
+}
+
+.header__cart-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.header__cart-item:hover {
+  cursor: pointer;
+  /* background-color: #f8f8f8; */
+}
+
+.header__cart-item-info {
+  position: relative;
+  display: block;
+  width: 100%;
+  color: #000000b8;
+  padding: 8px 25px;
+}
+
+.header__cart-item-info::before {
+  top: 0;
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 46px;
+  padding-top: 8px;
+  /* border-top: 1px solid rgba(46, 138, 138, 0.3); */
+}
+
+.header__cart-item-info:hover {
+  /* background-color: rgba(46, 138, 138, 0.3); */
+  color: #000000b8;
+  text-decoration: none;
+}
+
+/* .logout {
   margin: 0 20px;
 }
 
@@ -72,7 +141,7 @@ html {
 }
 .icon-logout:hover {
 color: hsl(0, 70%, 50%);
-}
+} */
 
 
 /* Container */
@@ -222,7 +291,7 @@ color: hsl(0, 70%, 50%);
 .border-col {
   padding: 0 48px;
 }
-
+allcustomer
 .column-with-border {
   border-right: 1px solid #000; /* Đường kẻ bên phải của cột */
 }
@@ -301,6 +370,7 @@ color: hsl(0, 70%, 50%);
   display: flex;
   justify-content: left;
 }
+
 .inputSearch {
   width: 350px;
   margin-top: 5px;
@@ -309,6 +379,18 @@ color: hsl(0, 70%, 50%);
 .dropdown {
   margin-left: 237px;
   margin-top: 8px;
+}
+
+.errorSearch {
+  display: inline;
+  position: fixed;
+  width: 100%;
+  font-size: 2em;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
 }
 
 /* Sinh nhật khách hàng */

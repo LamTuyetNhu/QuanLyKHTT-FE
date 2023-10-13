@@ -45,8 +45,39 @@
         <div class="info-admin">
           <h5 id="nameAdmin"></h5>
           <img src="/public/img/user.png" class="info-admin__img" />
+          <div class="header__cart-list">
+            <ul class="header__cart-list-item">
+              <li class="header__cart-item">
+                <div class="header__cart-item-info" data-toggle="modal" data-target="#myModal">Đăng xuất</div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              Bạn muốn đăng xuất?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn-modal btn " data-dismiss="modal">Ở lại</button>
+              <button type="button" class="btn-modal btn btn-danger" id="confirmDelete">Đăng xuất</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <!-- Container -->
       <div class="container1 container">
@@ -63,6 +94,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+
+        const logout = document.querySelector("#confirmDelete")
+    logout.addEventListener('click', function () {
+      window.location.href = "home.htm"
+    })
+    
         const id = localStorage.getItem("selectedCustomer");
 
         axios
