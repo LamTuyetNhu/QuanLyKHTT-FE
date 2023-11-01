@@ -13,7 +13,7 @@
       rel="stylesheet"
     />
     <!-- my css -->
-    <link rel="stylesheet" href="/public/css/home.css" />
+    <link rel="stylesheet" href="../public/css/home.css" />
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
@@ -39,12 +39,12 @@
       <!-- <header> -->
       <div class="header-admin">
         <a href="homeAdmin.htm"
-          ><img src="/public/img/logo_lotte.png" alt="" class="logo"
+          ><img src="../public/img/logo_lotte.png" alt="" class="logo"
         /></a>
 
         <div class="info-admin">
           <h5 id="nameAdmin"></h5>
-          <img src="/public/img/user.png" class="info-admin__img" />
+          <img src="../public/img/user.png" class="info-admin__img" />
           <div class="header__cart-list">
             <ul class="header__cart-list-item">
               <li class="header__cart-item">
@@ -89,6 +89,7 @@
       </div>
     </div>
 
+    <script src="../public/script/js.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -122,7 +123,9 @@
                 <br>
     
                 <div style="display: flex; justify-content: center">
-                
+                    <button onclick="goBack()" class="allcus-button" type="submit">
+                      <ion-icon name="arrow-undo-outline" ></ion-icon>
+                    </button>
                     <button class="allcus-button update-info" data-id="${dataAdmin.idAdmin}" type="submit">Cập nhật thông tin</button>
                     <button class="allcus-button update-pass" data-id="${dataAdmin.idAdmin}" type="submit">Đổi mật khẩu</button>
                  
